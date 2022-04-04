@@ -1,0 +1,65 @@
+frameworkVersion: '3'
+
+service: srvnotes
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 256
+#  timeout: 10 # lambda finished when reach timeout
+  stage: dev # local
+  region: eu-west-2
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:Scan"
+        - "dynamodb:PutItem"
+        - "dynamodb:UpdateItem"
+        - "dynamodb:DeleteItem"
+        - "dynamodb:GetItem"
+      Resource: "arn:aws:dynamodb:eu-west-2:414049677064:table/Notes"
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  tableName: Notes
+  serverless-offline:
+    httpPort: 8080
+  dynamodb:
+    start:
+      port: 8000
+      sharedDb: true
+      dbPath: ./s4s
+      migrate: true
+    stages:
+      - ${self:provider.stage}
+
+#package:
+#  patterns:
+#    - '!node_modules/**'
+
+functions:
+  app:
+    handler: .build/lambdaFn.handlerApp
+    events:
+      - httpApi: ANY /{proxy+}
+      - httpApi: ANY /
+
+resources:
+  Resources:
+    Notes:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
