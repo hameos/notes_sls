@@ -8,7 +8,7 @@
  `serverless dynamodb install`
 
 2. By default `"./s4s"` is the folder dynamodb store its data in offline mode.\
-   You can change its value through `custom.dynamodb.start.dbpath` in serverless.yml file.\
+   You can change its value through `custom.dynamodb.start.dbPath` in serverless.yml file.\
    If folder doesn't exist, create it. E.g: `"mkdir s4s"`
 
 3. You can launch the service in local or in aws:\
@@ -20,7 +20,6 @@
    ```
    If working on aws modify config .env file => DB_DYNAMO_OFFLINE=false and run
    ```
-      modify .env file => DB_DYNAMO_OFFLINE=false
       run "npm run sls:dev"
       run "npm run sls:deploy"
       test "curl http://aws_url_here/notes"
