@@ -2,16 +2,23 @@
 
 ### Instructions
 
-0. Tune .env file if you want to change some configuration
+0. Clone the repo\
+   git clone https://github.com/hameos/notes_sls.git \
+   cd notes_sls
 
-1. If folder .dynamodb doesn't exist, from root folder run:\
+1. Install nodejs dependency packages\
+   `npm i`
+
+2. Tune .env file if you want to change some configuration
+
+3. If folder .dynamodb doesn't exist, from root folder run:\
  `serverless dynamodb install`
 
-2. By default `"./s4s"` is the folder dynamodb store its data in offline mode.\
+4. By default `"./s4s"` is the folder dynamodb store its data in offline mode.\
    You can change its value through `custom.dynamodb.start.dbPath` in serverless.yml file.\
    If folder doesn't exist, create it. E.g: `"mkdir s4s"`
 
-3. You can launch the service in local or in aws:\
+5. You can launch the service in local or in aws:\
    If working in local modify config .env file => DB_DYNAMO_OFFLINE=true and run
     ``` 
       run "npm run sls:dev"
