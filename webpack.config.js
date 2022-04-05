@@ -2,9 +2,7 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
 const config = {
-  // For serverless: entry='./src/serverless/handler.ts'
-  // For localserver: entry='./src/server.ts',
-  entry: ['./src/server.ts'],
+  entry: ['./src/serverless/handler.ts'],
   mode: 'development',
   target: 'node',
   externalsPresets: { node: true }, // only for webpack 5

@@ -1,5 +1,5 @@
-const devconfig = require('./webpack.config.js')
+let initconfig = null
 
-const config = { ...devconfig }
-config.entry = ['./src/serverless/handler.ts']
-module.exports = config
+initconfig = process.env.NODE_ENV === 'development' ? require('./webpack.config.js') : require('./webpack.config.prod.js')
+
+module.exports = initconfig

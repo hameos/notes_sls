@@ -4,7 +4,9 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
+    "dynamodb:install": "serverless dynamodb install",
     "sls:dev": "export NODE_ENV=development && webpack --config ./webpack.config.serverless.js",
+    "sls:pro": "export NODE_ENV=production && webpack --config ./webpack.config.serverless.js",
     "sls:deploy": "serverless deploy",
     "sls:offline": "serverless offline start"
   },
